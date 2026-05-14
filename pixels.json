@@ -1,5 +1,11 @@
 {
   "width": 200,
   "height": 200,
-  "pixels": {}
+  "pixels": {
+    "11,11": {
+      "color": "#0000ff",
+      "author": "nic",
+      "timestamp": "2026-05-14T03:48:00.000Z"
+    }
+  }
 }
