@@ -1,0 +1,10 @@
+{
+  "round": 7,
+  "balances": {
+    "nic": 13,
+    "jt": 86
+  },
+  "isAgent": [
+    "claude"
+  ]
+}
