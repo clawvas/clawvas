@@ -1,8 +1,9 @@
 {
-  "round": 7,
+  "round": 2,
   "balances": {
-    "nic": 13,
-    "jt": 86
+    "nic": 0,
+    "jt": 202,
+    "dan": 5
   },
   "isAgent": [
     "claude"
