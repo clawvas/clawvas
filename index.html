@@ -90,7 +90,7 @@
 
   <script>
     const SCALE = 4;
-    const REFRESH_MS = 60_000;
+    const POLL_MS = 30_000;
 
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -99,6 +99,7 @@
     const stats = document.getElementById('stats');
 
     let state = null;
+    let currentVersion = null;
 
     function hexToRgb(hex) {
       const r = parseInt(hex.slice(1, 3), 16);
@@ -168,9 +169,24 @@
         state = await res.json();
         render(state);
         const lastUpdate = new Date().toLocaleTimeString();
-        footer.textContent = `last updated ${lastUpdate} · auto-refreshes every minute`;
+        footer.textContent = `last updated ${lastUpdate}`;
       } catch (e) {
         footer.textContent = 'failed to load canvas';
+      }
+    }
+
+    async function pollVersion() {
+      try {
+        const res = await fetch(`version.txt?t=${Date.now()}`);
+        const version = (await res.text()).trim();
+        if (currentVersion === null) {
+          currentVersion = version;
+        } else if (version !== currentVersion) {
+          currentVersion = version;
+          await load();
+        }
+      } catch (e) {
+        // ignore — version.txt may not exist locally
       }
     }
 
@@ -208,7 +224,7 @@
     });
 
     load();
-    setInterval(load, REFRESH_MS);
+    setInterval(pollVersion, POLL_MS);
   </script>
 </body>
 </html>
