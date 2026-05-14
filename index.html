@@ -112,7 +112,15 @@
       if (!timestamp) return 1;
       const age = (Date.now() - new Date(timestamp).getTime()) / (1000 * 60 * 60 * 24);
       const maxAge = 14;
-      return Math.max(0, 1 - age / maxAge);
+      // Ease out — fades slowly at first, accelerates near expiry
+      const t = Math.min(age / maxAge, 1);
+      return Math.max(0, 1 - (t * t));
+    }
+
+    function isNearExpiry(timestamp) {
+      if (!timestamp) return false;
+      const age = (Date.now() - new Date(timestamp).getTime()) / (1000 * 60 * 60 * 24);
+      return age > 10; // Last 4 days
     }
 
     function render(data) {
@@ -180,8 +188,11 @@
         const age = pixel.timestamp
           ? Math.floor((Date.now() - new Date(pixel.timestamp).getTime()) / (1000 * 60 * 60 * 24))
           : null;
-        const ageStr = age !== null ? ` · ${age}d ago` : '';
-        tooltip.textContent = `${x},${y} · ${pixel.color} · ${pixel.author}${ageStr}`;
+        const daysLeft = age !== null ? Math.max(0, 14 - age) : null;
+        const decayStr = daysLeft !== null
+          ? (daysLeft <= 3 ? ` · ⚠ ${daysLeft}d left` : ` · ${daysLeft}d left`)
+          : '';
+        tooltip.textContent = `${x},${y} · ${pixel.color} · ${pixel.author}${decayStr}`;
         tooltip.style.display = 'block';
         tooltip.style.left = `${e.clientX + 12}px`;
         tooltip.style.top = `${e.clientY - 24}px`;
