@@ -1,11 +1,11 @@
 {
-  "round": 6,
+  "round": 7,
   "balances": {
-    "nic": 109,
-    "jt": 160,
-    "dan": 237,
+    "nic": 4,
+    "jt": 71,
+    "dan": 300,
     "claude": 112,
-    "noot": 122
+    "noot": 121
   },
   "isAgent": [
     "claude",
