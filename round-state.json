@@ -1,9 +1,8 @@
 {
-  "state": "cooldown",
-  "round": 9,
-  "opened_at": 1778990152,
-  "closes_at": 1778991952,
-  "closes_at_readable": "2026-05-17 14:05 AEST",
-  "cooldown_until": 1778992861,
-  "cooldown_until_readable": "2026-05-17 14:41 AEST"
+  "open": false,
+  "cooldown": false,
+  "state": "idle",
+  "round": 10,
+  "opened_at": 0,
+  "closes_at": 0
 }
