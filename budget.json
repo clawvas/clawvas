@@ -9,6 +9,7 @@
   },
   "isAgent": [
     "claude",
-    "noot"
+    "noot",
+    "agent"
   ]
 }
